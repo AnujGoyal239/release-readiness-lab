@@ -1,59 +1,40 @@
 # OrderFlow
 
-This repository contains the Release Readiness Investigation & Deployment Approval Lab.
+This repository contains the Release Readiness Investigation & Deployment Approval Lab for **OrderFlow v2.3.0**.
 
 ## Application
 
-A simple Node.js Express application.
+A Node.js Express microservice responsible for order routing and flow processing.
 
 ### Endpoints
-- `GET /`
-- `GET /health`
+- `GET /`: Health & welcome message
+- `GET /health`: Microservice health check & version reporting
 
-## Current Release
-v2.3.0
-Production Deployment
+## Current Release Candidate
+- **Version:** `v2.3.0`
+- **Release Status:** Production-Ready (Release Readiness Pack Complete)
+- **Deployment Strategy:** Kubernetes Zero-Downtime RollingUpdate (`maxSurge: 1`, `maxUnavailable: 0`)
+- **Rollback Strategy:** Automated `scripts/rollback.sh` via Kubernetes rollout undo
+
+## Operational Documentation
+- [Release Readiness Pack (RRP)](./release/RELEASE_READINESS_PACK.md)
+- [Release Metadata](./release/release.json)
+- [Approvals Policy](./release/approvals.yml)
+- [Deployment Configuration](./release/deployment-config.yml)
+- [Rollback Plan](./release/rollback.yml)
+- [Release Summary](./release/release-summary.yml)
 
 ## Getting Started
 
-### Clone
-```bash
-git clone https://github.com/kalvium-devops/release-readiness-lab.git
-cd release-readiness-lab
-```
-
-### Install
+### Local Installation & Testing
 ```bash
 cd app
 npm install
-```
-
-### Run
-```bash
+npm test
 npm start
 ```
-Alternatively, use Docker Compose:
-```bash
-docker-compose up --build
-```
 
-### Push
-Make your changes and push them back to the repository.
-
-## Repository Structure
-```
-├── .github/
-│   └── workflows/
-│       └── release.yml
-├── app/
-│   ├── server.js
-│   └── package.json
-├── deployment/
-│   ├── kubernetes/
-│   └── terraform/
-├── release/
-├── scripts/
-├── Dockerfile
-├── docker-compose.yml
-└── README.md
-```
+### Deployment Pipeline
+The CI/CD pipeline is defined in `.github/workflows/release.yml`. It enforces:
+1. `validate-release`: Unit testing, version verification, and manifest existence checks.
+2. `deploy-production`: Gated release verification executed only after successful validation.

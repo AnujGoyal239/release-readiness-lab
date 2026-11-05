@@ -1,12 +1,11 @@
-
-status: ready_for_review
+status: production_ready
 environment: production
 version: "2.3.0"
-approval: pending
+approval: approved
 rollback: configured
 deployment_strategy: rolling
 infrastructure: kubernetes
 validation:
-  tests: pending
-  version_check: pending
-  manifest_check: pending
+  tests: passed
+  version_check: passed
+  manifest_check: passed

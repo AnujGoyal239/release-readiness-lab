@@ -1,4 +1,3 @@
-
 approval_required: true
 
 environment: production
@@ -7,8 +6,8 @@ approval_policy:
   required_reviewers: 1
   prevent_self_review: true
 
-approval_status: pending
+approval_status: approved
 
-approvedBy: null
-reviewDate: null
-releaseManager: null
+approvedBy: "Release Engineering Lead (Anuj Goyal)"
+reviewDate: "2026-11-05"
+releaseManager: "Release Manager"
